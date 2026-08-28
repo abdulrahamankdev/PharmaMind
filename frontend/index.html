@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PharmaMind — Intelligent Drug Discovery</title>
+  <link rel="icon" type="image/png" href="logo_v2.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon" style="background: none; box-shadow: none;"><img src="logo_nano_banana.png?v=2" alt="PharmaMind Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;"></div>
+        <div>
+          <h2>PharmaMind</h2><span>Intelligent Drug Discovery</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="active">Dashboard</button>
+        <button>Disease Explorer</button>
+        <button>Target Explorer</button>
+        <button>Compound Explorer</button>
+        <button>AI Predictions</button>
+        <button>Hypothesis Lab</button>
+        <button>Literature Search</button>
+        <button>Reports</button>
+      </nav>
+      <div class="spacer"></div>
+      <nav class="nav">
+        <button>Settings</button>
+      </nav>
+      <div class="profile">
+        <div class="avatar">N</div>
+        <div><strong>Dr. Nadia</strong><small>Researcher</small></div>
+        <div>
+        </div><i class="profile-chevron" data-lucide="chevron-down"></i>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="top" style="justify-content: space-between; width: 100%;">
+        <button class="menu-toggle" id="mobile-menu-btn" aria-label="Open menu"><i data-lucide="menu"></i></button>
+        <div class="actions"><label class="search"><i data-lucide="search" size="17"></i><input
+              placeholder="Ask PharmaMind anything..." id="ask"></label>
+        </div>
+      </header>
+
+      <!-- ── Tab 1: Dashboard ── -->
+      <div id="tab-dashboard" class="tab-content" style="display: block;">
+        <section class="metrics">
+          <div class="card metric">
+            <div class="metric-head">
+              <div class="metric-icon"><i data-lucide="target"></i></div>Targets Analyzed
+            </div><b>12,450 <span class="up">+12.3%</span></b><small class="sub">this month</small>
+          </div>
+          <div class="card metric">
+            <div class="metric-head">
+              <div class="metric-icon"><i data-lucide="flask-conical"></i></div>Compounds Evaluated
+            </div><b>8,932 <span class="up">+8.7%</span></b><small class="sub">this month</small>
+          </div>
+          <div class="card metric">
+            <div class="metric-head">
+              <div class="metric-icon"><i data-lucide="network"></i></div>Predictions Generated
+            </div><b>3,214 <span class="up">+15.2%</span></b><small class="sub">this month</small>
+          </div>
+          <div class="card metric">
+            <div class="metric-head">
+              <div class="metric-icon"><i data-lucide="lightbulb"></i></div>Hypotheses Created
+            </div><b>1,247 <span class="up">+11.8%</span></b><small class="sub">this month</small>
+          </div>
+        </section>
+
+        <div style="display: block; margin-bottom: 16px;">
+          <section class="card">
+            <div class="card-head">
+              <div>
+                <h3>Top Predicted Compounds</h3>
+                <div class="sub">Ranked by relevance algorithm</div>
+              </div>
+              <div style="position: relative; display: inline-block;" 
+                   onmouseenter="this.querySelector('.tooltip-content').style.opacity='1'; this.querySelector('.tooltip-content').style.visibility='visible'; this.querySelector('.tooltip-content').style.transform='translateY(0)';" 
+                   onmouseleave="this.querySelector('.tooltip-content').style.opacity='0'; this.querySelector('.tooltip-content').style.visibility='hidden'; this.querySelector('.tooltip-content').style.transform='translateY(10px)';">
+                <button aria-label="Prediction information" style="display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #94a3b8; background: transparent; color: var(--muted); cursor: help; transition: all 0.2s ease; padding: 0;" onmouseover="this.style.color='var(--primary)'; this.style.borderColor='var(--primary)'; this.style.background='rgba(39,195,234,0.08)';" onmouseout="this.style.color='#94a3b8'; this.style.borderColor='#94a3b8'; this.style.background='transparent';">
+                  <i data-lucide="info" size="13" style="stroke-width: 2.5;"></i>
+                </button>
+                <div class="tooltip-content" style="visibility: hidden; opacity: 0; transform: translateY(10px); width: 300px; background-color: #ffffff; color: var(--text); text-align: left; border-radius: 10px; padding: 18px; position: absolute; z-index: 100; right: 0; top: 130%; border: 1px solid var(--panel-border); box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); font-size: 13px; line-height: 1.6; pointer-events: none;">
+                  <h4 style="margin: 0 0 10px 0; color: var(--primary); font-size: 14px; font-weight: 700;">Relevance Algorithm Overview</h4>
+                  <p style="margin: 0 0 12px 0; color: var(--muted);">Compounds are dynamically ranked by evaluating predicted binding affinity, molecular properties (ADMET), and historical clinical phase success.</p>
+                  <div style="display: flex; gap: 10px; align-items: center; padding-top: 12px; border-top: 1px solid var(--panel-border);">
+                    <span style="background: rgba(39, 195, 234, 0.1); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 800;">pIC50</span>
+                    <span style="color: var(--muted); font-size: 11px; font-weight: 500;">Values > 7.0 indicate high potency</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="disease" style="border-radius: 0; border: none; border-bottom: 1px solid rgba(39,195,234,0.1); padding: 16px 24px; min-height: auto; flex-direction: row; align-items: center; justify-content: space-between; background: linear-gradient(90deg, rgba(39,195,234,0.04) 0%, transparent 100%);">
+              <div class="content">
+                <div class="sub current-focus" style="margin-top: 0; font-size: 11px;">DISEASE FOCUS</div>
+                <strong style="font-size: 18px; margin-top: 2px; color: var(--primary);">Corona Virus (COVID-19)</strong>
+              </div>
+            </div>
+            <table class="data-table dashboard-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Compound</th>
+                  <th>Target</th>
+                  <th>Relevance</th>
+                  <th>Confidence</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="rank">1</div></td>
+                  <td><div class="compound"><div class="molecule"><i data-lucide="hexagon" size="18"></i></div><strong>Nirmatrelvir</strong></div></td>
+                  <td><span class="target-tag">Mpro (3CLpro)</span></td>
+                  <td><div class="relevance-col"><div class="score">0.98</div><div class="bar-wrap"><div class="bar" style="width: 98%; background: var(--success);"></div></div></div></td>
+                  <td><span class="pill high">High</span></td>
+                  <td><div class="evidence">8.5 pIC50</div></td>
+                </tr>
+                <tr>
+                  <td><div class="rank">2</div></td>
+                  <td><div class="compound"><div class="molecule"><i data-lucide="hexagon" size="18"></i></div><strong>Remdesivir</strong></div></td>
+                  <td><span class="target-tag">RdRp</span></td>
+                  <td><div class="relevance-col"><div class="score">0.94</div><div class="bar-wrap"><div class="bar" style="width: 94%; background: var(--success);"></div></div></div></td>
+                  <td><span class="pill high">High</span></td>
+                  <td><div class="evidence">6.1 pIC50</div></td>
+                </tr>
+                <tr>
+                  <td><div class="rank">3</div></td>
+                  <td><div class="compound"><div class="molecule"><i data-lucide="hexagon" size="18"></i></div><strong>Molnupiravir</strong></div></td>
+                  <td><span class="target-tag">RdRp</span></td>
+                  <td><div class="relevance-col"><div class="score">0.89</div><div class="bar-wrap"><div class="bar" style="width: 89%; background: var(--primary);"></div></div></div></td>
+                  <td><span class="pill high">High</span></td>
+                  <td><div class="evidence">5.8 pIC50</div></td>
+                </tr>
+                <tr>
+                  <td><div class="rank">4</div></td>
+                  <td><div class="compound"><div class="molecule"><i data-lucide="hexagon" size="18"></i></div><strong>Baricitinib</strong></div></td>
+                  <td><span class="target-tag">JAK1/2</span></td>
+                  <td><div class="relevance-col"><div class="score">0.85</div><div class="bar-wrap"><div class="bar" style="width: 85%; background: var(--primary);"></div></div></div></td>
+                  <td><span class="pill high">High</span></td>
+                  <td><div class="evidence">8.2 pIC50</div></td>
+                </tr>
+                <tr>
+                  <td><div class="rank">5</div></td>
+                  <td><div class="compound"><div class="molecule"><i data-lucide="hexagon" size="18"></i></div><strong>Favipiravir</strong></div></td>
+                  <td><span class="target-tag">RdRp</span></td>
+                  <td><div class="relevance-col"><div class="score">0.72</div><div class="bar-wrap"><div class="bar" style="width: 72%; background: var(--warning);"></div></div></div></td>
+                  <td><span class="pill medium">Medium</span></td>
+                  <td><div class="evidence">4.2 pIC50</div></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="predictions-footer"><button class="quick-btn view-predictions">View All Predictions</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="bottom">
+          <section class="card evidence">
+            <h3>Evidence Summary</h3>
+            <div class="sub">Confidence across available sources</div>
+            <div class="donut-wrap">
+              <div class="donut">
+                <center>36<small>Total Evidence</small></center>
+              </div>
+              <div class="evidence-list">
+                <div>🟣 Research Papers &nbsp; <b>18</b> <span class="sub">(50%)</span></div>
+                <div>🟣 Clinical Studies &nbsp; <b>9</b> <span class="sub">(25%)</span></div>
+                <div>🔵 Preclinical Data &nbsp; <b>6</b> <span class="sub">(17%)</span></div>
+                <div>🔵 Other Sources &nbsp; <b>3</b> <span class="sub">(8%)</span></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="card quick">
+          <h3>Quick Actions</h3>
+          <div class="quick-grid">
+            <button class="quick-btn"><i data-lucide="scan-search"></i><strong>Explore Diseases</strong><span>Browse
+                disease database</span></button>
+            <button class="quick-btn"><i data-lucide="target"></i><strong>Find Targets</strong><span>Discover biological
+                targets</span></button>
+            <button class="quick-btn"><i data-lucide="flask-conical"></i><strong>Search Compounds</strong><span>Search
+                chemical database</span></button>
+            <button class="quick-btn"><i data-lucide="lightbulb"></i><strong>Create Hypothesis</strong><span>Generate
+                new hypotheses</span></button>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Tab 2: Disease Explorer ── -->
+      <div id="tab-disease" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3>Disease Explorer</h3>
+              <div class="sub">Federated semantic search across PubMed, ClinicalTrials.gov, Nature, and PrimeKG.</div>
+            </div>
+          </div>
+          <div style="padding: 20px 24px 0;">
+            <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+              <div style="flex: 1; position: relative;">
+                <i data-lucide="search" size="18" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted);"></i>
+                <input type="text" id="disease-search-input"
+                  placeholder="Enter keywords, genes, or diseases (e.g., SARS-CoV-2, Mpro)..."
+                  style="width: 100%; padding: 12px 16px 12px 42px; background: #ffffff; border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none; font-size: 15px;">
+              </div>
+              <button class="btn btn-primary" id="disease-search-btn"
+                style="padding: 0 24px; font-weight: 600; font-size: 14px; background: var(--primary); color: var(--text); border: none; border-radius: 8px; cursor: pointer;">Search</button>
+            </div>
+          </div>
+          <div id="disease-results-container" class="explorer-results" style="padding: 0 24px;">
+            <div style="color: var(--muted); text-align: center; padding: 60px 0; font-size: 15px;">
+              Enter keywords, genes, or diseases above to search across federated sources.
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Tab 3: Target Explorer ── -->
+      <div id="tab-target" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3>Biological Target Explorer</h3>
+              <div class="sub">Inspect genes and search ChEMBL bioactivity records</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 15px; margin-bottom: 15px;">
+            <input type="text" id="target-search-input" placeholder="Enter target gene symbol (e.g., BACE1, EGFR)..."
+              style="flex: 1; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none; font-size: 0.95rem;">
+            <button class="btn btn-primary" id="target-search-btn" style="padding: 10px 20px; font-weight: 600;">Explore
+              Target</button>
+          </div>
+          <div id="target-results-container" class="explorer-results">
+            <div style="color: #475569; text-align: center; padding: 40px 0;">Search a gene symbol to load targets and
+              bioactivity.</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Tab 4: Compound Explorer ── -->
+      <div id="tab-compound" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3>Compound Modulator Explorer</h3>
+              <div class="sub">Inspect SMILES, chemical properties, and Lipinski rule compliance</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 15px; margin-bottom: 15px;">
+            <input type="text" id="compound-search-input"
+              placeholder="Enter compound ChEMBL ID (e.g., CHEMBL2180736, Metformin)..."
+              style="flex: 1; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none; font-size: 0.95rem;">
+            <button class="btn btn-primary" id="compound-search-btn" style="padding: 10px 20px; font-weight: 600;">Fetch
+              Details</button>
+          </div>
+          <div id="compound-results-container" class="explorer-results">
+            <div style="color: #475569; text-align: center; padding: 40px 0;">Enter a compound identifier or name to
+              verify molecular properties.</div>
+          </div>
+        </section>
+      </div>
+
+
+      <!-- ── Tab 6: AI Predictions ── -->
+      <div id="tab-predictions" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3>AI Predictions Engine</h3>
+              <div class="sub">Run multi-stage queries (KG → ChEMBL → PubMed → Scoring → LLM Agent)</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+              <div>
+                <label
+                  style="display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.85rem; color: var(--muted);">Disease
+                  (MeSH/MONDO term)</label>
+                <input type="text" id="ai-disease-input" placeholder="e.g. Alzheimer disease"
+                  style="width: 100%; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none;">
+              </div>
+              <div>
+                <label
+                  style="display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.85rem; color: var(--muted);">Target
+                  Gene (NCBI/Symbol)</label>
+                <input type="text" id="ai-target-input" placeholder="e.g. BACE1"
+                  style="width: 100%; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none;">
+              </div>
+              <div>
+                <label
+                  style="display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.85rem; color: var(--muted);">Specific
+                  Compound (Optional)</label>
+                <input type="text" id="ai-compound-input" placeholder="e.g. Verubecestat"
+                  style="width: 100%; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none;">
+              </div>
+            </div>
+
+            <div
+              style="display: flex; flex-direction: column; gap: 15px; background: var(--panel); padding: 15px; border-radius: 8px; border: 1px solid var(--panel-border);">
+              <h4 style="margin: 0; color: var(--primary);">Pipeline Options</h4>
+              <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                <input type="checkbox" id="ai-run-refuter" checked style="width: 16px; height: 16px;">
+                <label for="ai-run-refuter" style="font-size: 0.9rem; color: var(--muted); cursor: pointer;">Run Adversarial
+                  Refuter Agent validation</label>
+              </div>
+              <div style="margin-top: 10px;">
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Max Candidates to
+                  Score</label>
+                <select id="ai-max-compounds"
+                  style="width: 100%; padding: 8px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 6px; color: var(--text);">
+                  <option value="5">5 Compounds</option>
+                  <option value="10" selected>10 Compounds</option>
+                  <option value="20">20 Compounds</option>
+                </select>
+              </div>
+              <div>
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Max Literature
+                  Articles to Scan</label>
+                <select id="ai-max-pubmed"
+                  style="width: 100%; padding: 8px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 6px; color: var(--text);">
+                  <option value="5">5 Papers</option>
+                  <option value="10" selected>10 Papers</option>
+                  <option value="20">20 Papers</option>
+                </select>
+              </div>
+              <button class="quick-btn" id="run-ai-btn"
+                style="margin-top: auto; padding: 12px; font-size: 1rem; font-weight: 700; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border:0; color: var(--text);">Execute
+                Discovery Pipeline</button>
+            </div>
+          </div>
+
+          <!-- Step Progress Animation -->
+          <div id="ai-pipeline-progress"
+            style="display: none; margin-top: 25px; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; border: 1px solid var(--panel-border);">
+            <h4 style="margin: 0 0 15px 0; color: var(--text);">Pipeline Execution Trail</h4>
+            <div class="steps-trail" style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="step-item" id="step-kg"><i data-lucide="circle-dashed" class="spinning"
+                  style="color: var(--primary);"></i> Subgraph Extraction (PrimeKG) <span class="step-status">Pending...</span>
+              </div>
+              <div class="step-item" id="step-chembl"><i data-lucide="circle" style="color: var(--muted);"></i> Bioactivity
+                Querying (ChEMBL API) <span class="step-status">Waiting...</span></div>
+              <div class="step-item" id="step-pubmed"><i data-lucide="circle" style="color: var(--muted);"></i> Literature
+                Search (PubMed E-Utilities) <span class="step-status">Waiting...</span></div>
+              <div class="step-item" id="step-scoring"><i data-lucide="circle" style="color: var(--muted);"></i>
+                Degree-Agnostic Compound Scoring <span class="step-status">Waiting...</span></div>
+              <div class="step-item" id="step-hypothesis"><i data-lucide="circle" style="color: var(--muted);"></i>
+                Hypothesis Generation (Hypothesis LLM Agent) <span class="step-status">Waiting...</span></div>
+              <div class="step-item" id="step-refuter"><i data-lucide="circle" style="color: var(--muted);"></i> Adversarial
+                Refutation & Risk Flags (Refuter Agent) <span class="step-status">Waiting...</span></div>
+            </div>
+          </div>
+
+          <div id="ai-pipeline-results"
+            style="display: none; margin-top: 25px; display: flex; flex-direction: column; gap: 20px;">
+            <!-- Results populated by app.js -->
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Tab 7: Hypothesis Lab ── -->
+      <div id="tab-lab" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3>Hypothesis Lab — Adversarial Validation</h3>
+              <div class="sub">Challenge existing claims and analyze clinical false positive risk</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+              <h4 style="margin: 0; color: #f43f5e;">Submit Claim to Challenge</h4>
+              <div>
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Disease
+                  Focus</label>
+                <input type="text" id="lab-disease" placeholder="e.g. Alzheimer disease"
+                  style="width: 100%; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline:none;">
+              </div>
+              <div>
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Target
+                  Protein</label>
+                <input type="text" id="lab-target" placeholder="e.g. BACE1"
+                  style="width: 100%; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline:none;">
+              </div>
+              <div>
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Modulating
+                  Compound</label>
+                <input type="text" id="lab-compound" placeholder="e.g. Verubecestat"
+                  style="width: 100%; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline:none;">
+              </div>
+            </div>
+
+            <div
+              style="display: flex; flex-direction: column; gap: 15px; background: var(--panel); padding: 15px; border-radius: 8px; border: 1px solid var(--panel-border);">
+              <h4 style="margin: 0; color: var(--muted);">Adversarial Context</h4>
+              <div>
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Target ChEMBL ID
+                  (Recommended to fetch live bioactivity data)</label>
+                <input type="text" id="lab-chembl-id" placeholder="e.g. CHEMBL2366517"
+                  style="width: 100%; padding: 10px 14px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; color: var(--text); outline:none;">
+              </div>
+              <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
+                <label style="font-size: 0.85rem; color: var(--muted);">Optionally Paste Hypothesis JSON:</label>
+                <textarea id="lab-json" placeholder='{"proposed_mechanism": "..."}'
+                  style="width: 100%; height: 80px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 6px; color: var(--primary); font-family: monospace; font-size: 11px; padding: 8px; outline: none;"></textarea>
+              </div>
+              <button class="quick-btn" id="run-lab-btn"
+                style="margin-top: auto; padding: 12px; font-weight: 700; background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); border:0; color: var(--text);">Run
+                Adversarial Refuter</button>
+            </div>
+          </div>
+
+          <div id="lab-results" style="display: none; margin-top: 25px;">
+            <!-- Populated by app.js -->
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Tab 8: Literature Search ── -->
+      <div id="tab-literature" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3 style="color: var(--text); font-weight: 800;">NCBI PubMed Literature Search</h3>
+              <div class="sub">Search scientific publications and parse clinical abstracts</div>
+            </div>
+          </div>
+          
+          <div style="padding: 24px 0 10px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+              <div>
+                <label style="display: block; margin-bottom: 10px; font-weight: 700; color: var(--text); font-size: 14px;">Disease Term</label>
+                <input type="text" id="lit-disease" placeholder="e.g. SARS-CoV-2, Alzheimer's..."
+                  style="width: 100%; padding: 14px 16px; background: #ffffff; border: 2px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none; font-size: 15px; font-weight: 500; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--panel-border)'">
+              </div>
+              <div>
+                <label style="display: block; margin-bottom: 10px; font-weight: 700; color: var(--text); font-size: 14px;">Target Gene Symbol</label>
+                <input type="text" id="lit-target" placeholder="e.g. Mpro, BACE1..."
+                  style="width: 100%; padding: 14px 16px; background: #ffffff; border: 2px solid var(--panel-border); border-radius: 8px; color: var(--text); outline: none; font-size: 15px; font-weight: 500; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--panel-border)'">
+              </div>
+            </div>
+            <button class="btn btn-primary" id="lit-search-btn" style="width: 100%; padding: 16px; font-weight: 800; font-size: 16px; background: var(--primary); color: var(--text); border: none; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">Fetch PubMed Literature</button>
+          </div>
+          
+          <div id="lit-results" class="explorer-results" style="margin-top: 10px; border-top: 2px solid var(--panel-border); padding-top: 24px;">
+            <div style="color: var(--muted); text-align: center; padding: 40px 0; font-size: 15px; font-weight: 600;">Provide disease or target symbol to search literature.</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Tab 9: Reports ── -->
+      <div id="tab-reports" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3 style="color: var(--text); font-weight: 800;">Hypothesis Reports Lab</h3>
+              <div class="sub">Export generated claims and review documentation</div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn btn-secondary" id="export-report-json"><i data-lucide="file-json" size="14"></i> JSON</button>
+              <button class="btn btn-secondary" id="export-report-csv"><i data-lucide="file-spreadsheet" size="14"></i> CSV</button>
+              <button class="btn btn-secondary" id="export-report-md"><i data-lucide="file-text" size="14"></i> Markdown</button>
+              <button class="btn btn-primary" id="export-report-pdf"><i data-lucide="download" size="14"></i> PDF Report</button>
+            </div>
+          </div>
+          <div id="report-view"
+            style="margin-top: 24px; background: var(--panel); padding: 40px; border-radius: 12px; border: 1px solid var(--panel-border); min-height: 400px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div style="color: var(--muted); text-align: center; font-size: 15px; font-weight: 500;">
+              <i data-lucide="file-search" size="48" style="color: var(--muted); margin-bottom: 16px; opacity: 0.5;"></i><br>
+              No active hypothesis report generated.<br>Run a discovery query or validation first.
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── Tab 10: Settings ── -->
+      <div id="tab-settings" class="tab-content" style="display: none;">
+        <section class="card explorer-card">
+          <div class="card-head">
+            <div>
+              <h3>PharmaMind Configuration</h3>
+              <div class="sub">Adjust global application and AI parameters</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div
+              style="background: var(--panel); border: 1px solid var(--panel-border); padding: 20px; border-radius: 8px;">
+              <h4 style="margin: 0 0 15px 0; color: var(--primary); display: flex; align-items: center; gap: 8px;"><i
+                  data-lucide="cpu" size="18"></i> Agent Configuration</h4>
+              <div>
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Local Inference
+                  Model</label>
+                <input type="text" value="qwen3.5:2b" disabled
+                  style="width: 100%; padding: 10px; background: var(--panel-hover); border: 1px solid var(--panel-border); border-radius: 6px; color: var(--muted); cursor: not-allowed; outline: none;">
+              </div>
+              <div style="margin-top: 15px;">
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">Refuter
+                  Conservatism Threshold (0.0 to 1.0)</label>
+                <input type="range" min="0" max="1" step="0.1" value="0.7"
+                  style="width: 100%; accent-color: var(--primary); cursor: pointer;">
+              </div>
+            </div>
+
+            <div
+              style="background: var(--panel); border: 1px solid var(--panel-border); padding: 20px; border-radius: 8px;">
+              <h4 style="margin: 0 0 15px 0; color: var(--primary); display: flex; align-items: center; gap: 8px;"><i
+                  data-lucide="database" size="18"></i> External API Connections</h4>
+              <div>
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">ChEMBL API Base
+                  URI</label>
+                <input type="text" value="https://www.ebi.ac.uk/chembl/api/data" disabled
+                  style="width: 100%; padding: 10px; background: var(--panel-hover); border: 1px solid var(--panel-border); border-radius: 6px; color: var(--muted); cursor: not-allowed; outline: none;">
+              </div>
+              <div style="margin-top: 15px;">
+                <label style="display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted);">NCBI PubMed
+                  Integration</label>
+                <input type="text" value="Enabled (Entrez Utilities Fallback)" disabled
+                  style="width: 100%; padding: 10px; background: var(--panel-hover); border: 1px solid var(--panel-border); border-radius: 6px; color: #10b981; cursor: not-allowed; outline: none;">
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+            <button class="quick-btn"
+              style="padding: 10px 24px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--primary); font-weight: 600;"
+              onclick="alert('Settings configured successfully.')">Save Configuration</button>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

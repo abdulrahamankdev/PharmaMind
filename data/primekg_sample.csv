@@ -1,0 +1,71 @@
+x_type,x_id,x_name,y_type,y_id,y_name,relation,x_source,y_source
+disease,MONDO:0004975,Alzheimer disease,gene/protein,NCBI:672,BACE1,disease_protein,MONDO,NCBI
+disease,MONDO:0004975,Alzheimer disease,gene/protein,NCBI:351,APP,disease_protein,MONDO,NCBI
+disease,MONDO:0004975,Alzheimer disease,gene/protein,NCBI:5663,PSEN1,disease_protein,MONDO,NCBI
+disease,MONDO:0004975,Alzheimer disease,gene/protein,NCBI:5664,PSEN2,disease_protein,MONDO,NCBI
+disease,MONDO:0004975,Alzheimer disease,gene/protein,NCBI:4137,MAPT,disease_protein,MONDO,NCBI
+disease,MONDO:0004975,Alzheimer disease,gene/protein,NCBI:348,APOE,disease_protein,MONDO,NCBI
+disease,MONDO:0005148,Type 2 diabetes mellitus,gene/protein,NCBI:3630,INS,disease_protein,MONDO,NCBI
+disease,MONDO:0005148,Type 2 diabetes mellitus,gene/protein,NCBI:3643,INSR,disease_protein,MONDO,NCBI
+disease,MONDO:0005148,Type 2 diabetes mellitus,gene/protein,NCBI:5315,PKM,disease_protein,MONDO,NCBI
+disease,MONDO:0005148,Type 2 diabetes mellitus,gene/protein,NCBI:2645,GCK,disease_protein,MONDO,NCBI
+disease,MONDO:0005148,Type 2 diabetes mellitus,gene/protein,NCBI:5467,PPARG,disease_protein,MONDO,NCBI
+disease,MONDO:0005737,Ebola hemorrhagic fever,gene/protein,NCBI:2168,FURIN,disease_protein,MONDO,NCBI
+disease,MONDO:0005737,Ebola hemorrhagic fever,gene/protein,NCBI:6714,SRC,disease_protein,MONDO,NCBI
+disease,MONDO:0018874,Acute myeloid leukemia,gene/protein,NCBI:2322,FLT3,disease_protein,MONDO,NCBI
+disease,MONDO:0018874,Acute myeloid leukemia,gene/protein,NCBI:5566,PRKCA,disease_protein,MONDO,NCBI
+disease,MONDO:0018874,Acute myeloid leukemia,gene/protein,NCBI:4750,NEK2,disease_protein,MONDO,NCBI
+disease,MONDO:0018874,Acute myeloid leukemia,gene/protein,NCBI:4851,NOTCH1,disease_protein,MONDO,NCBI
+disease,MONDO:0004979,Asthma,gene/protein,NCBI:7124,TNF,disease_protein,MONDO,NCBI
+disease,MONDO:0004979,Asthma,gene/protein,NCBI:3569,IL6,disease_protein,MONDO,NCBI
+disease,MONDO:0004979,Asthma,gene/protein,NCBI:3567,IL4,disease_protein,MONDO,NCBI
+disease,MONDO:0004979,Asthma,gene/protein,NCBI:3574,IL13,disease_protein,MONDO,NCBI
+disease,MONDO:0005180,Parkinson disease,gene/protein,NCBI:5071,SNCA,disease_protein,MONDO,NCBI
+disease,MONDO:0005180,Parkinson disease,gene/protein,NCBI:5500,LRRK2,disease_protein,MONDO,NCBI
+disease,MONDO:0005180,Parkinson disease,gene/protein,NCBI:54622,PINK1,disease_protein,MONDO,NCBI
+disease,MONDO:0005180,Parkinson disease,gene/protein,NCBI:5071,PARK7,disease_protein,MONDO,NCBI
+disease,MONDO:0005087,Non-small cell lung carcinoma,gene/protein,NCBI:1956,EGFR,disease_protein,MONDO,NCBI
+disease,MONDO:0005087,Non-small cell lung carcinoma,gene/protein,NCBI:4893,KRAS,disease_protein,MONDO,NCBI
+disease,MONDO:0005087,Non-small cell lung carcinoma,gene/protein,NCBI:238,ALK,disease_protein,MONDO,NCBI
+disease,MONDO:0005070,Breast cancer,gene/protein,NCBI:672,BRCA1,disease_protein,MONDO,NCBI
+disease,MONDO:0005070,Breast cancer,gene/protein,NCBI:675,BRCA2,disease_protein,MONDO,NCBI
+disease,MONDO:0005070,Breast cancer,gene/protein,NCBI:2064,HER2,disease_protein,MONDO,NCBI
+disease,MONDO:0005015,Chronic myeloid leukemia,gene/protein,NCBI:25,ABL1,disease_protein,MONDO,NCBI
+disease,MONDO:0005015,Chronic myeloid leukemia,gene/protein,NCBI:613,BCR,disease_protein,MONDO,NCBI
+disease,MONDO:0007254,Prostate cancer,gene/protein,NCBI:367,AR,disease_protein,MONDO,NCBI
+disease,MONDO:0007254,Prostate cancer,gene/protein,NCBI:5728,PTEN,disease_protein,MONDO,NCBI
+gene/protein,NCBI:672,BACE1,drug,DB01679,Verubecestat,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:672,BACE1,drug,DB06712,Lanabecestat,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:672,BACE1,drug,DB14915,Atabecestat,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:351,APP,drug,CHEMBL2180736,Semagacestat,drug_protein,NCBI,ChEMBL
+gene/protein,NCBI:3630,INS,drug,DB00030,Insulin glargine,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:3643,INSR,drug,DB09159,Metformin,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:3643,INSR,drug,DB01132,Pioglitazone,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:5467,PPARG,drug,DB01132,Pioglitazone,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:2322,FLT3,drug,DB01254,Dasatinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:2322,FLT3,drug,DB06589,Quizartinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:2322,FLT3,drug,DB11963,Gilteritinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:7124,TNF,drug,DB00051,Adalimumab,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:7124,TNF,drug,DB00005,Etanercept,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:3569,IL6,drug,DB06273,Tocilizumab,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:3574,IL13,drug,DB12146,Dupilumab,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:5071,SNCA,drug,CHEMBL1234,Anle138b,drug_protein,NCBI,ChEMBL
+gene/protein,NCBI:5500,LRRK2,drug,CHEMBL4523,MLi-2,drug_protein,NCBI,ChEMBL
+gene/protein,NCBI:5500,LRRK2,drug,CHEMBL5023,DNL201,drug_protein,NCBI,ChEMBL
+gene/protein,NCBI:1956,EGFR,drug,DB00530,Erlotinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:1956,EGFR,drug,DB01259,Lapatinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:1956,EGFR,drug,DB09073,Osimertinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:25,ABL1,drug,DB00619,Imatinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:25,ABL1,drug,DB01254,Dasatinib,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:367,AR,drug,DB01229,Enzalutamide,drug_protein,NCBI,DrugBank
+gene/protein,NCBI:367,AR,drug,DB06070,Abiraterone,drug_protein,NCBI,DrugBank
+drug,DB01679,Verubecestat,disease,MONDO:0004975,Alzheimer disease,drug_disease,DrugBank,MONDO
+drug,DB00030,Insulin glargine,disease,MONDO:0005148,Type 2 diabetes mellitus,drug_disease,DrugBank,MONDO
+drug,DB01254,Dasatinib,disease,MONDO:0018874,Acute myeloid leukemia,drug_disease,DrugBank,MONDO
+drug,DB01254,Dasatinib,disease,MONDO:0005015,Chronic myeloid leukemia,drug_disease,DrugBank,MONDO
+drug,DB00051,Adalimumab,disease,MONDO:0004979,Asthma,drug_disease,DrugBank,MONDO
+drug,DB00530,Erlotinib,disease,MONDO:0005087,Non-small cell lung carcinoma,drug_disease,DrugBank,MONDO
+drug,DB09073,Osimertinib,disease,MONDO:0005087,Non-small cell lung carcinoma,drug_disease,DrugBank,MONDO
+drug,DB00619,Imatinib,disease,MONDO:0005015,Chronic myeloid leukemia,drug_disease,DrugBank,MONDO
+drug,DB01229,Enzalutamide,disease,MONDO:0007254,Prostate cancer,drug_disease,DrugBank,MONDO
+drug,DB06589,Quizartinib,disease,MONDO:0018874,Acute myeloid leukemia,drug_disease,DrugBank,MONDO

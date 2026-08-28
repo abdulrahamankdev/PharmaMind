@@ -1,0 +1,81 @@
+# BioCypher Schema Configuration for PharmaMind MVP
+# Maps PrimeKG entity types to BioCypher node/edge classes
+
+title: PharmaMind Knowledge Graph
+schema_config_as_fields: false
+
+# ── Node Classes ────────────────────────────────────────────────────────────
+node_types:
+  disease:
+    represented_as: node
+    preferred_id: mondo
+    label_in_input: disease
+    properties:
+      name: str
+      mondo_id: str
+      synonyms: list
+      description: str
+      degree: int
+
+  target:
+    represented_as: node
+    preferred_id: ncbigene
+    label_in_input: gene_or_protein
+    properties:
+      name: str
+      gene_symbol: str
+      ncbi_gene_id: str
+      uniprot_id: str
+      target_type: str
+      organism: str
+      degree: int
+
+  compound:
+    represented_as: node
+    preferred_id: drugbank
+    label_in_input: drug
+    properties:
+      name: str
+      drugbank_id: str
+      chembl_id: str
+      smiles: str
+      inchi_key: str
+      molecular_weight: float
+      alogp: float
+      hbd: int
+      hba: int
+      max_phase: int
+      degree: int
+
+# ── Edge Classes ─────────────────────────────────────────────────────────────
+edge_types:
+  disease_target_association:
+    represented_as: edge
+    label_in_input: disease_protein
+    source: disease
+    target: target
+    properties:
+      score: float
+      source_database: str
+
+  target_compound_modulation:
+    represented_as: edge
+    label_in_input: drug_protein
+    source: target
+    target: compound
+    properties:
+      pchembl_value: float
+      activity_type: str
+      standard_value: float
+      standard_units: str
+      assay_id: str
+
+  disease_compound_indication:
+    represented_as: edge
+    label_in_input: drug_disease
+    source: compound
+    target: disease
+    properties:
+      indication_type: str
+      max_phase: int
+      source_database: str
